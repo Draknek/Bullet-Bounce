@@ -33,6 +33,32 @@ package
 			
 			x += vx;
 			y += vy;
+			
+			var a:Array = [];
+			
+			world.getClass(Player, a);
+			
+			for each (var p:Player in a) {
+				if (FP.distance(x, y, p.x, p.y) < p.radius) {
+					p.hit(this);
+					
+					world.remove(this);
+					return;
+				}
+			}
+			
+			a.length = 0; // clear a
+			
+			world.getClass(Enemy, a);
+			
+			for each (var e:Enemy in a) {
+				if (FP.distance(x, y, e.x, e.y) < e.radius) {
+					e.hit(this);
+					
+					world.remove(this);
+					return;
+				}
+			}
 		}
 		
 		public override function render (): void

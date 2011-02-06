@@ -131,7 +131,7 @@ package
 
 		// Returns 2 times the signed triangle area. The result is positive if
 		// abc is ccw, negative if abc is cw, zero if abc is degenerate.
-		private static function Signed2DTriArea(ax: Number, ay: Number, bx: Number, by: Number, cx: Number, cy: Number): Number
+		public static function Signed2DTriArea(ax: Number, ay: Number, bx: Number, by: Number, cx: Number, cy: Number): Number
 		{
 		return (ax - cx) * (by - cy) - (ay - cy) * (bx - cx);
 		}

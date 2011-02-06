@@ -12,6 +12,8 @@ package
 		
 		public var time:uint = 0;
 		
+		public var radius:Number = 8;
+		
 		public function Enemy (_x:Number = 0, _y:Number = 0, _vx:Number = 0, _vy:Number = 0)
 		{
 			x = _x;
@@ -20,18 +22,25 @@ package
 			vy = _vy;
 		}
 		
+		public function hit (b:Bullet): void
+		{
+			// TODO!
+		}
+		
 		public override function update (): void
 		{
-			x += vx;
-			y += vy;
+			y = (15 * Math.cos(time * -1 * FP.RAD)) + 240 + (180 * Math.sin(time * 1.3 * FP.RAD));
+			x = (15 * Math.sin(time * -1 * FP.RAD)) + 320 + (200 * Math.cos(time / 1.5 * FP.RAD));
 			
-			if (time % 240 == 0) {
-				shootAt(100, 200);
-			} else if (time % 240 == 120) {
-				shootAt(440, 380);
-			}
+			var a:Array = [];
+			world.getClass(Player, a);
+			
 			time += 1;
 			
+			if (time % 40 == 0) {
+				var p:Player = FP.choose(a);
+				shootAt(p.x, p.y);
+			}
 		}
 		
 		public function shootAt (tx:Number, ty:Number):void
@@ -40,10 +49,12 @@ package
 			var dy:Number = ty - y;
 			var dz:Number = Math.sqrt(dx*dx + dy*dy);
 			
-			dx *= 5/dz;
-			dy *= 5/dz;
+			dx /= dz;
+			dy /= dz;
 			
-			world.add(new Bullet(x, y, dx, dy));
+			var speed:Number = 4;
+			
+			world.add(new Bullet(x + dx*(radius+1), y + dy*(radius+1), dx*speed, dy*speed));
 		}
 		
 		public override function render (): void

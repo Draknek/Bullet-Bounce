@@ -10,12 +10,14 @@ package
 		public var p1:Player;
 		public var p2:Player;
 		
+		public var bullets:Array = [];
+		
 		public function Link (_p1:Player, _p2:Player)
 		{
 			p1 = _p1;
 			p2 = _p2;
 			
-			layer = -9;
+			layer = -11;
 		}
 		
 		public override function update (): void
@@ -23,16 +25,75 @@ package
 			x = (p1.x + p2.x)*0.5;
 			y = (p1.y + p2.y)*0.5;
 			
+			var b:Bullet;
+			
 			var a:Array = [];
 			
 			world.getClass(Bullet, a);
 			
-			for each (var b:Bullet in a) {
-				// TODO: magic
+			for each (b in a) {
+				catchTest(b);
+				//mirrorTest(b);
+			}
+			
+			if (Input.pressed(Key.SPACE)) {
+				var dx:Number = p2.x - p1.x;
+				var dy:Number = p2.y - p1.y;
+				var dz:Number = FP.distance(dx, dy);
+				
+				dx /= dz;
+				dy /= dz;
+				
+				var speed:Number = 5;
+				
+				var vx:Number = -dy * speed;
+				var vy:Number = dx * speed;
+				
+				for each (b in bullets) {
+					b.vx = vx * b.x;
+					b.vy = vy * b.x;
+					
+					var t:Number = b.y;
+					
+					b.x = b.oldX = FP.lerp(p1.x, p2.x, t) + b.vx;
+					b.y = b.oldY = FP.lerp(p1.y, p2.y, t) + b.vy;
+					
+					world.add(b);
+				}
+				
+				bullets.length = 0;
 			}
 		}
 		
-		private function test (b:Bullet): Boolean
+		private function catchTest (b:Bullet): void
+		{
+			var now:Number = Line.Signed2DTriArea(p1.x, p1.y, p2.x, p2.y, b.x, b.y);
+			var then:Number = Line.Signed2DTriArea(p1.oldX, p1.oldY, p2.oldX, p2.oldY, b.oldX, b.oldY);
+			
+			now = (now < 0) ? -1 : 1;
+			then = (then < 0) ? -1 : 1;
+			
+			var dx:Number = p2.x - p1.x;
+			var dy:Number = p2.y - p1.y;
+			var dzSq:Number = dx*dx + dy*dy;
+			
+			var t:Number = dx * (b.x - p1.x) + dy * (b.y - p1.y);
+			
+			if (t < 0 || t > dzSq) {
+				return;
+			}
+			
+			if (now != then) {
+				world.remove(b);
+				
+				b.x = then;
+				b.y = t / dzSq;
+				
+				bullets.push(b);
+			}
+		}
+		
+		private function mirrorTest (b:Bullet): Boolean
 		{
 			var contact:LineIntersection = new LineIntersection();
 			
@@ -82,6 +143,15 @@ package
 		public override function render (): void
 		{
 			Draw.linePlus(p1.x, p1.y, p2.x, p2.y, 0xFFFFFF);
+			
+			for each (var b:Bullet in bullets) {
+				var t:Number = b.y;
+				
+				var x:Number = FP.lerp(p1.x, p2.x, t);
+				var y:Number = FP.lerp(p1.y, p2.y, t);
+				
+				Draw.circlePlus(x, y, 2, 0xFF0000);
+			}
 		}
 	}
 }
