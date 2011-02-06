@@ -51,7 +51,7 @@ package
 				shootAt(x, y - 100);			
 			}
 			
-			if (x < 0 || x > 640 || y < 0 || y > 480) {
+			if (x < -50 || x > 700 || y < -50 || y > 550) {
 				world.remove(this);
 			}
 			

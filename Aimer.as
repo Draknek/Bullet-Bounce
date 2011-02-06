@@ -31,6 +31,10 @@ package
 				shootAt(p2.x, p2.y);
 			}
 			
+			if (x < -50 || x > 700 || y < -50 || y > 550) {
+				world.remove(this);
+			}
+			
 			time += 1;
 		}
 		

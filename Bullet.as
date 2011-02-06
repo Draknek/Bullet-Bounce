@@ -34,6 +34,11 @@ package
 			x += vx;
 			y += vy;
 			
+			if (x < -50 || x > 700 || y < -50 || y > 550) {
+				world.remove(this);
+				return;
+			}
+			
 			var a:Array = [];
 			
 			world.getClass(Player, a);

@@ -15,7 +15,7 @@ package
 		
 		public var time:uint = 0;
 		
-		public var radius:Number = 8;
+		public var radius:Number = 16;
 		protected var image:Image;
 
 		protected var p1:Player;
