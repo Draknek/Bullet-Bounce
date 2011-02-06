@@ -31,6 +31,8 @@ package
 		public var oldX:Number = 0;
 		public var oldY:Number = 0;
 		
+		public var stun:Number = 0;
+		
 		public function Player (_x:Number = 0, _y:Number = 0, _vx:Number = 0, _vy:Number = 0, _arrowKeys:Boolean = true )
 		{
 			x = _x;
@@ -69,13 +71,20 @@ package
 		
 		public function hit (b:Bullet): void
 		{
-			// TODO!
+			if (stun < 0) {
+				stun = 90;
+			}
 		}
 		
 		public override function update (): void
 		{
 			oldX = x;
 			oldY = y;
+			
+			if (stun > 0) {
+				stun--;
+				return;
+			}
 			
 			if (Input.check(upKey)) {
 				vy = -SPEED;

@@ -47,8 +47,15 @@ package
 					break;
 			}
 			
+
 			
 			super.update();
+			
+			if (p1.stun > 0 && p2.stun > 0) {
+				remove(p1);
+				remove(p2);
+				remove(link);
+			}
 		}
 		
 		public override function render (): void

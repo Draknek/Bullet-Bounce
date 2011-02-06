@@ -28,7 +28,7 @@ package
 			var b:Bullet;
 			
 			var a:Array = [];
-			
+
 			world.getClass(Bullet, a);
 			
 			for each (b in a) {

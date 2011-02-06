@@ -33,7 +33,7 @@ package
 					targetX = Level(world).p2.x;
 					targetY = Level(world).p2.y;
 				}
-			} else if (time % 150 > 120) {
+			} else if (time % 150 > 120 && time % 3 == 0) {
 				shootAt(targetX, targetY);
 			} else {
 				x += vx;
