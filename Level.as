@@ -13,8 +13,8 @@ package
 		
 		public function Level ()
 		{
-			add(p1 = new Player(100, 100));
-			add(p2 = new Player(540, 380));
+			add(p1 = new Player(100, 100, 0, 0, true));
+			add(p2 = new Player(540,380,0,0, false));
 			add(link = new Link(p1, p2));
 			
 			add(new Enemy(430, 160));
