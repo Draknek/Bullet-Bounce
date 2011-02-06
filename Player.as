@@ -7,8 +7,11 @@ package
 	
 	public class Player extends Entity
 	{
-		[Embed(source = 'assets/ship.png')]
-		private const IMAGE:Class;
+		[Embed(source='../assets/p1.png')]
+		private const P1_IMAGE:Class;
+
+		[Embed(source='../assets/p2.png')]
+		private const P2_IMAGE:Class;
 		
 		public var vx: Number = 0;
 		public var vy: Number = 0;
@@ -18,6 +21,8 @@ package
 		private var downKey:int;
 		private var leftKey:int;
 		private var rightKey:int;
+		
+		private var image:Image;
 		
 		private const SPEED:Number = 3;
 		
@@ -52,7 +57,14 @@ package
 					rightKey = Key.D;				
 			}
 			
-			addGraphic(new Image(IMAGE));
+			if (_arrowKeys) {
+				image = new Image(P1_IMAGE);
+			} else {
+				image = new Image(P2_IMAGE);
+			}
+			
+			image.centerOO();
+			graphic = image;
 		}
 		
 		public function hit (b:Bullet): void
@@ -83,12 +95,6 @@ package
 			
 			x += vx;
 			y += vy;
-		}
-		
-		public override function render (): void
-		{
-			Draw.circlePlus(x, y, 20, 0x0000FF);
-			//super.render();
 		}
 	}
 }

@@ -7,12 +7,20 @@ package
 	
 	public class Enemy extends Entity
 	{
+		[Embed(source='../assets/enemy_25_1.png')]
+		private const SPRITE:Class;
+		
 		public var vx: Number = 0;
 		public var vy: Number = 0;
 		
 		public var time:uint = 0;
 		
 		public var radius:Number = 8;
+		protected var image:Image;
+
+		protected var p1:Player;
+		
+		protected var p2:Player; 
 		
 		public function Enemy (_x:Number = 0, _y:Number = 0, _vx:Number = 0, _vy:Number = 0)
 		{
@@ -20,6 +28,12 @@ package
 			y = _y;
 			vx = _vx;
 			vy = _vy;
+			
+			image = new Image(SPRITE);
+			image.centerOO();
+			
+			graphic = image;
+			
 		}
 		
 		public function hit (b:Bullet): void
@@ -57,10 +71,10 @@ package
 			world.add(new Bullet(x + dx*(radius+1), y + dy*(radius+1), dx*speed, dy*speed));
 		}
 		
-		public override function render (): void
+/*		public override function render (): void
 		{
 			Draw.circlePlus(x, y, 10, 0xFF0000);
-		}
+		}*/
 	}
 }
 
