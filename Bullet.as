@@ -28,6 +28,7 @@ package
 		
 		public override function update (): void
 		{
+			if (!world) return;
 			oldX = x;
 			oldY = y;
 			

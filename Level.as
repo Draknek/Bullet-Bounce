@@ -21,6 +21,8 @@ package
 		
 		public override function update (): void
 		{
+			if (Input.pressed(Key.R)) FP.world = new Level;
+			
 			time++;
 			time = time % 2300;
 			

@@ -36,7 +36,7 @@ package
 				//mirrorTest(b);
 			}
 			
-			if (Input.pressed(Key.SPACE)) {
+			{//if (Input.pressed(Key.SPACE)) {
 				var dx:Number = p2.x - p1.x;
 				var dy:Number = p2.y - p1.y;
 				var dz:Number = FP.distance(dx, dy);
@@ -49,19 +49,28 @@ package
 				var vx:Number = -dy * speed;
 				var vy:Number = dx * speed;
 				
-				for each (b in bullets) {
-					b.vx = vx * b.x;
-					b.vy = vy * b.x;
+				for (var i:int = 0; i < bullets.length; i++) {
+					b = bullets[i];
+					b.vx -= 1;
 					
-					var t:Number = b.y;
+					if (b.vx < 0) {
+						b.vx = vx * b.x;
+						b.vy = vy * b.x;
 					
-					b.x = b.oldX = FP.lerp(p1.x, p2.x, t) + b.vx;
-					b.y = b.oldY = FP.lerp(p1.y, p2.y, t) + b.vy;
+						var t:Number = b.y;
 					
-					world.add(b);
+						b.x = b.oldX = FP.lerp(p1.x, p2.x, t) + b.vx;
+						b.y = b.oldY = FP.lerp(p1.y, p2.y, t) + b.vy;
+					
+						world.add(b);
+						
+						bullets.splice(i, 1);
+						
+						i--;
+					}
 				}
 				
-				bullets.length = 0;
+				//bullets.length = 0;
 			}
 		}
 		
@@ -88,6 +97,7 @@ package
 				
 				b.x = then;
 				b.y = t / dzSq;
+				b.vx = 10;
 				
 				bullets.push(b);
 			}

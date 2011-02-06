@@ -24,7 +24,9 @@ package
 		}
 		
 		override public function update():void 
-		{	
+		{
+			if (!world) return;
+			
 			if (time % 150 == 120) { 
 				if (Toolbox.randBool()) {
 					targetX = Level(world).p1.x;

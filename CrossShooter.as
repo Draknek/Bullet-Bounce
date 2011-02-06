@@ -29,6 +29,8 @@ package
 		
 		override public function update():void 
 		{
+			if (!world) return;
+			
 			x += vx;
 			y += vy;
 			
