@@ -38,7 +38,7 @@ package
 		
 		public function hit (b:Bullet): void
 		{
-			// TODO!
+			
 		}
 		
 		public override function update (): void

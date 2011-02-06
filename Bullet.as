@@ -46,7 +46,7 @@ package
 			for each (var p:Player in a) {
 				if (FP.distance(x, y, p.x, p.y) < p.radius) {
 					p.hit(this);
-					
+					p.stun = 150;
 					world.remove(this);
 					return;
 				}
@@ -59,7 +59,7 @@ package
 			for each (var e:Enemy in a) {
 				if (FP.distance(x, y, e.x, e.y) < e.radius) {
 					e.hit(this);
-					
+					world.remove(e);
 					world.remove(this);
 					return;
 				}
