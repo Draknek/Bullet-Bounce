@@ -9,7 +9,8 @@ package
 	{
 		public function Level ()
 		{
-			add(new Player());
+			add(new Player(300, 300, 0, 0, true));
+			add(new Player(400,400,0,0, false));
 		}
 		
 		public override function update (): void
