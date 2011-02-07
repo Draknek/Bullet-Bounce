@@ -36,41 +36,37 @@ package
 				//mirrorTest(b);
 			}
 			
-			{//if (Input.pressed(Key.SPACE)) {
-				var dx:Number = p2.x - p1.x;
-				var dy:Number = p2.y - p1.y;
-				var dz:Number = FP.distance(dx, dy);
+			var dx:Number = p2.x - p1.x;
+			var dy:Number = p2.y - p1.y;
+			var dz:Number = FP.distance(dx, dy);
+			
+			dx /= dz;
+			dy /= dz;
+			
+			var speed:Number = 5;
+			
+			var vx:Number = -dy * speed;
+			var vy:Number = dx * speed;
+			
+			for (var i:int = 0; i < bullets.length; i++) {
+				b = bullets[i];
+				b.vx -= 1;
 				
-				dx /= dz;
-				dy /= dz;
+				if (b.vx < 0) {
+					b.vx = vx * b.x;
+					b.vy = vy * b.x;
 				
-				var speed:Number = 5;
+					var t:Number = b.y;
 				
-				var vx:Number = -dy * speed;
-				var vy:Number = dx * speed;
+					b.x = b.oldX = FP.lerp(p1.x, p2.x, t) + b.vx;
+					b.y = b.oldY = FP.lerp(p1.y, p2.y, t) + b.vy;
 				
-				for (var i:int = 0; i < bullets.length; i++) {
-					b = bullets[i];
-					b.vx -= 1;
+					world.add(b);
 					
-					if (b.vx < 0) {
-						b.vx = vx * b.x;
-						b.vy = vy * b.x;
+					bullets.splice(i, 1);
 					
-						var t:Number = b.y;
-					
-						b.x = b.oldX = FP.lerp(p1.x, p2.x, t) + b.vx;
-						b.y = b.oldY = FP.lerp(p1.y, p2.y, t) + b.vy;
-					
-						world.add(b);
-						
-						bullets.splice(i, 1);
-						
-						i--;
-					}
+					i--;
 				}
-				
-				//bullets.length = 0;
 			}
 		}
 		

@@ -38,7 +38,7 @@ package
 		
 		public function hit (b:Bullet): void
 		{
-			
+			world.remove(this);
 		}
 		
 		public override function update (): void
@@ -70,11 +70,6 @@ package
 			
 			world.add(new Bullet(x + dx*(radius+1), y + dy*(radius+1), dx*speed, dy*speed));
 		}
-		
-/*		public override function render (): void
-		{
-			Draw.circlePlus(x, y, 10, 0xFF0000);
-		}*/
 	}
 }
 

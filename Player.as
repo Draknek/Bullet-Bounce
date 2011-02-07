@@ -71,8 +71,8 @@ package
 		
 		public function hit (b:Bullet): void
 		{
-			if (stun < 0) {
-				stun = 60;
+			if (stun <= 0) {
+				stun = 120;
 			}
 		}
 		
