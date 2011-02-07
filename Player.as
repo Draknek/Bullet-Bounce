@@ -72,7 +72,7 @@ package
 		public function hit (b:Bullet): void
 		{
 			if (stun < 0) {
-				stun = 90;
+				stun = 60;
 			}
 		}
 		
@@ -82,9 +82,13 @@ package
 			oldY = y;
 			
 			if (stun > 0) {
+				Image(graphic).alpha = (stun % 30 < 15) ? 0.5 : 1.0;
+				
 				stun--;
 				return;
 			}
+			
+			Image(graphic).alpha = 1.0;
 			
 			if (Input.check(upKey)) {
 				vy = -SPEED;
