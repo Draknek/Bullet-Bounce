@@ -11,7 +11,7 @@ package
 		{
 			Text.size = 32;
 			
-			var title:Text = new Text("Untitled reflecting shooter thing\n\n(definitely not going to let this\nbe a final title no way)", 0, 0, {align:"center"});
+			var title:Text = new Text("Beautiful Bullet Bounce", 0, 0, {align:"center"});
 			
 			Text.size = 24;
 			
@@ -25,7 +25,11 @@ package
 				FP.world = new Level(true);
 			});
 			
-			addElements([title, oneMouse, oneKeys, two]);
+			Text.size = 16;
+			
+			var credits:Text = new Text("Created by Alan Hazelden and William David Hunt");
+			
+			addElements([title, oneMouse, oneKeys, two, credits]);
 		}
 		
 		private function addElements(list:Array):void
@@ -37,7 +41,7 @@ package
 				h += o.height;
 			}
 			
-			var start:int = 50;
+			var start:int = 0;
 			
 			var padding:int = Number(FP.height - start - h) / (list.length + 1);
 			
