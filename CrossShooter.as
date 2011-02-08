@@ -46,11 +46,15 @@ package
 				shootAt(x - 100, y - 100);
 				shootAt(x - 100, y + 100);
 				shootAt(x + 100, y - 100);
+			
+				Audio.play("crossshooter");
 			} else if ( time % 120 == 0) {
 				shootAt(x + 100, y);
 				shootAt(x - 100, y);
 				shootAt(x, y + 100);
-				shootAt(x, y - 100);			
+				shootAt(x, y - 100);	
+				
+				Audio.play("crossshooter");		
 			}
 			
 			if (x < -50 || x > 700 || y < -50 || y > 550) {

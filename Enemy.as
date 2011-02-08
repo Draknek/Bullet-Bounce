@@ -38,7 +38,11 @@ package
 		
 		public function hit (b:Bullet): void
 		{
-			if (world) world.remove(this);
+			if (!world) return;
+			
+			world.remove(this);
+			
+			Audio.play("explode");
 		}
 		
 		public override function update (): void

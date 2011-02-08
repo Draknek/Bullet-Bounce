@@ -96,6 +96,8 @@ package
 				b.vx = 10;
 				
 				bullets.push(b);
+				
+				Audio.play("bounce");
 			}
 		}
 		

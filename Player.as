@@ -51,6 +51,7 @@ package
 		{
 			if (stun <= 0) {
 				stun = 120;
+				Audio.play("playerhit");
 			}
 		}
 	}

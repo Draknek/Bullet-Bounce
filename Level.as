@@ -72,6 +72,8 @@ package
 			super.update();
 			
 			if (!gameOver && p1.stun > 0 && p2.stun > 0) {
+				Audio.play("playerdie");
+				
 				gameOver = true;
 				
 				remove(p1);

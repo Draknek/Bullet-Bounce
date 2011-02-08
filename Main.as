@@ -15,6 +15,8 @@ package
 		{
 			sitelock("draknek.org");
 			
+			Audio.init(this);
+			
 			super.init();
 		}
 		
