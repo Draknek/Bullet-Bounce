@@ -21,8 +21,12 @@ package
 			oldX = x;
 			oldY = y;
 			
-			stun = Math.max(stun, target.stun);
-			target.stun = stun;
+			//This code kills both ships if one gets hit: not much fun
+			//stun = Math.max(stun, target.stun);
+			//target.stun = stun;
+			
+			//Instead make following ship invincible!
+			stun = 1;
 			
 			var dx:Number = target.x - x;
 			var dy:Number = target.y - y;

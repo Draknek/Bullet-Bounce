@@ -77,6 +77,12 @@ package
 				remove(p1);
 				remove(p2);
 				remove(link);
+				
+				var resetText:Text = new Text("Game over\n\nPress R to reset\n\nEsc for main menu", 320, 240, {size: 24, align:"center"});
+				
+				resetText.centerOO();
+				
+				addGraphic(resetText, -50);
 			}
 		}
 		
