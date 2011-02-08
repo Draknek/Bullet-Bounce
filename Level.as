@@ -12,10 +12,16 @@ package
 		public var link:Link;
 		public var time:int = 0;
 		
-		public function Level ()
+		public function Level (twoPlayer:Boolean = true)
 		{
-			add(p1 = new Player(100, 100, 0, 0, true));
-			add(p2 = new Player(540,380,0,0, false));
+			if (twoPlayer) {
+				add(p1 = new KeyboardPlayer(100, 100, 0, 0, false));
+				add(p2 = new KeyboardPlayer(540,380,0,0, true));
+			} else {
+				add(p1 = new Player(100, 100, 0, 0, false));
+				add(p2 = new Player(540,380,0,0, true));
+			}
+			
 			add(link = new Link(p1, p2));
 		}
 		
@@ -48,8 +54,6 @@ package
 					add(new CrossShooter(630, 470, -1, -1));
 					break;
 			}
-			
-
 			
 			super.update();
 			

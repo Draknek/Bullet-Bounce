@@ -8,23 +8,17 @@ package
 	public class Player extends Entity
 	{
 		[Embed(source='../assets/p1.png')]
-		private const P1_IMAGE:Class;
+		public const P1_IMAGE:Class;
 
 		[Embed(source='../assets/p2.png')]
-		private const P2_IMAGE:Class;
+		public const P2_IMAGE:Class;
 		
 		public var vx: Number = 0;
 		public var vy: Number = 0;
-		public var arrowKeys:Boolean;
 		
-		private var upKey:int;
-		private var downKey:int;
-		private var leftKey:int;
-		private var rightKey:int;
+		public var image:Image;
 		
-		private var image:Image;
-		
-		private const SPEED:Number = 3;
+		public const SPEED:Number = 3;
 		
 		public var radius:Number = 8;
 		
@@ -33,7 +27,7 @@ package
 		
 		public var stun:Number = 0;
 		
-		public function Player (_x:Number = 0, _y:Number = 0, _vx:Number = 0, _vy:Number = 0, _arrowKeys:Boolean = true )
+		public function Player (_x:Number = 0, _y:Number = 0, _vx:Number = 0, _vy:Number = 0, _p1:Boolean = true )
 		{
 			x = _x;
 			y = _y;
@@ -45,21 +39,7 @@ package
 			
 			layer = -10;
 			
-			arrowKeys = _arrowKeys;
-			
-			if (arrowKeys) {
-					upKey = Key.UP;
-					downKey = Key.DOWN;
-					leftKey = Key.LEFT;
-					rightKey = Key.RIGHT;
-			} else {
-					upKey = Key.W;
-					downKey = Key.S;
-					leftKey = Key.A;
-					rightKey = Key.D;				
-			}
-			
-			if (_arrowKeys) {
+			if (_p1) {
 				image = new Image(P1_IMAGE);
 			} else {
 				image = new Image(P2_IMAGE);
@@ -74,40 +54,6 @@ package
 			if (stun <= 0) {
 				stun = 120;
 			}
-		}
-		
-		public override function update (): void
-		{
-			oldX = x;
-			oldY = y;
-			
-			if (stun > 0) {
-				Image(graphic).alpha = (stun % 30 < 15) ? 0.5 : 1.0;
-				
-				stun--;
-				return;
-			}
-			
-			Image(graphic).alpha = 1.0;
-			
-			if (Input.check(upKey)) {
-				vy = -SPEED;
-			} else if (Input.check(downKey)) {
-				vy = SPEED;
-			} else {
-				vy = 0;
-			}
-			
-			if (Input.check(leftKey)) {
-				vx = -SPEED;
-			} else if (Input.check(rightKey)) {
-				vx = SPEED;
-			} else {
-				vx = 0;
-			}
-			
-			x += vx;
-			y += vy;
 		}
 	}
 }
