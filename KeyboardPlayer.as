@@ -14,6 +14,8 @@ package
 		private var leftKey:int;
 		private var rightKey:int;
 		
+		public const SPEED:Number = 3;
+		
 		public function KeyboardPlayer (_x:Number = 0, _y:Number = 0, _vx:Number = 0, _vy:Number = 0, _arrowKeys:Boolean = true )
 		{
 			super(_x, _y, _vx, _vy, _arrowKeys);
@@ -31,15 +33,6 @@ package
 					leftKey = Key.A;
 					rightKey = Key.D;				
 			}
-			
-			if (_arrowKeys) {
-				image = new Image(P1_IMAGE);
-			} else {
-				image = new Image(P2_IMAGE);
-			}
-			
-			image.centerOO();
-			graphic = image;
 		}
 		
 		public override function update (): void

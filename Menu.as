@@ -15,11 +15,17 @@ package
 			
 			Text.size = 24;
 			
-			var two:Button = new Button(0, 0, new Text("Start"), function ():void {
+			var oneMouse:Button = new Button(0, 0, new Text("One player (mouse)"), function ():void {
+				FP.world = new Level(false, false);
+			});
+			var oneKeys:Button = new Button(0, 0, new Text("One player (arrows)"), function ():void {
+				FP.world = new Level(false, true);
+			});
+			var two:Button = new Button(0, 0, new Text("Two player (WASD/arrows)"), function ():void {
 				FP.world = new Level(true);
 			});
 			
-			addElements([title, two]);
+			addElements([title, oneMouse, oneKeys, two]);
 		}
 		
 		private function addElements(list:Array):void

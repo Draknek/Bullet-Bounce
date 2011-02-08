@@ -12,14 +12,27 @@ package
 		public var link:Link;
 		public var time:int = 0;
 		
-		public function Level (twoPlayer:Boolean = true)
+		public var twoPlayer:Boolean;
+		public var keyboard:Boolean;
+		
+		public var gameOver:Boolean = false;
+		
+		public function Level (twoPlayer:Boolean = true, keyboard:Boolean = true)
 		{
+			this.twoPlayer = twoPlayer;
+			this.keyboard = keyboard;
+			
 			if (twoPlayer) {
 				add(p1 = new KeyboardPlayer(100, 100, 0, 0, false));
 				add(p2 = new KeyboardPlayer(540,380,0,0, true));
 			} else {
-				add(p1 = new Player(100, 100, 0, 0, false));
-				add(p2 = new Player(540,380,0,0, true));
+				if (keyboard) {
+					add(p1 = new KeyboardPlayer(320, 300, 0, 0, true));
+				} else {
+					add(p1 = new MousePlayer());
+				}
+				
+				add(p2 = new FollowPlayer(p1, 320,240));
 			}
 			
 			add(link = new Link(p1, p2));
@@ -27,7 +40,8 @@ package
 		
 		public override function update (): void
 		{
-			if (Input.pressed(Key.R)) FP.world = new Level;
+			if (Input.pressed(Key.ESCAPE)) FP.world = new Menu;
+			if (Input.pressed(Key.R)) FP.world = new Level(twoPlayer, keyboard);
 			
 			time++;
 			time = time % 2300;
@@ -57,7 +71,9 @@ package
 			
 			super.update();
 			
-			if (p1.stun > 0 && p2.stun > 0) {
+			if (!gameOver && p1.stun > 0 && p2.stun > 0) {
+				gameOver = true;
+				
 				remove(p1);
 				remove(p2);
 				remove(link);

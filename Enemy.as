@@ -38,7 +38,7 @@ package
 		
 		public function hit (b:Bullet): void
 		{
-			world.remove(this);
+			if (world) world.remove(this);
 		}
 		
 		public override function update (): void

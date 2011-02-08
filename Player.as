@@ -18,8 +18,6 @@ package
 		
 		public var image:Image;
 		
-		public const SPEED:Number = 3;
-		
 		public var radius:Number = 8;
 		
 		public var oldX:Number = 0;
